@@ -29,4 +29,4 @@ For example, use a .docx-to-.txt script and then this script's
 ### striprtf
 ![Build status](https://github.com/joshy/striprtf/workflows/striprtf%20build/badge.svg)
 ### Change File Extension for Files in a Folder
-![Stack Overflow](https://stackoverflow.com/questions/16736080/change-the-file-extension-for-files-in-a-txt_folder)
+[Stack Overflow](https://stackoverflow.com/questions/16736080/change-the-file-extension-for-files-in-a-txt_folder)
