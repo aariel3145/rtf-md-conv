@@ -8,7 +8,8 @@
 # from https://stackoverflow.com/questions/16736080/change-the-file-extension-for-files-in-a-folder
 ###
 
-import os, sys
+import os
+import sys
 folder = 'D:\Dropbox\Creative Projects\Coding\rtf-md-conv\rtf_infile'
 oldType = '.txt'
 newType = '.md'
@@ -16,6 +17,6 @@ newType = '.md'
 for filename in os.listdir(folder):
     infilename = os.path.join(folder, filename)
     if not os.path.isfile(infilename) : continue
-    oldbase = os.path.splittext(filename)
+    oldbase = os.path.splitext(filename)
     newname = infilename.replace(oldType, newType)
-    output.os.rename(infilename, newname)
+    output = os.rename(infilename, newname)
