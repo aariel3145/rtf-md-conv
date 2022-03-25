@@ -6,6 +6,7 @@ exports the strings as .txt files,
 and changes the filetype from .txt to .md
 
 ## How to Use
+Fill out the "info" diciontary in __main__.py:
 ```python
 info = {
     'in_folder' : "[location of incoming files]",
