@@ -73,3 +73,12 @@ def txt_md(info, base):
         except FileExistsError:
             print(newname + " already exists")
             return True
+
+def rename_base(info, base):
+
+    out_filename = info['out_folder'] + "/" + base + info['newType']
+    # rearrange to yyyy-mm-dd
+    newbase = "20" + base[4:6] + "-" + base[0:2] + "-" + base[2:4]
+    new_filename = info['out_folder'] + "/" + newbase + info['newType']
+
+    os.rename(out_filename, new_filename)

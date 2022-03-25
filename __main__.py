@@ -24,6 +24,9 @@ for filename in os.listdir(info['in_folder']):
     # convert from midType to newType
     error = txt_md(info, base)
 
+    # rearrange filename
+    rename_base(info, base)
+
     if error == True:
         failure += 1
     else:
