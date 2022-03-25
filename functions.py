@@ -1,0 +1,56 @@
+import os
+import sys
+
+from striprtf.striprtf import rtf_to_text
+
+### 
+# convert .rtf to .txt
+# forked from https://github.com/joshy/striprtf
+###
+def rtf_txt(info, base):  
+    
+    
+    # figure out infile name
+    infilename = (info['in_folder'] + "/" + base + info['oldType'])
+
+    # open file to read
+    rtf_file = open(infilename, 'r')
+    # read into string
+    rtf_string = rtf_file.read()
+    # close input file
+    rtf_file.close()
+
+    # convert to middle type
+    txt_string = rtf_to_text(rtf_string)
+
+    # figure out txt outfile name
+    txt_filename = (info['mid_folder'] + "/" + base + info['midType'])
+
+    # save string as .txt file
+    txt_file = open(txt_filename, 'w')
+    txt_file.write(txt_string)
+    txt_file.close()
+
+###
+# Change File Extneion for Files in a Folder
+# from https://stackoverflow.com/questions/16736080/change-the-file-extension-for-files-in-a-folder
+###
+def txt_md(info, base):
+
+    txt_filename = info['mid_folder'] + "/" + base + info['midType']
+    out_filename = info['out_folder'] + "/" + base + info['newType']
+    # check if we are overwriting or saving again
+    if info['mid_folder'] != info['out_folder']:
+        # open intermediate file, copy text
+        txt_file = open(txt_filename, 'r')
+        txt_string = txt_file.read()
+        txt_file.close()
+
+        # open output file, paste text
+        out_file = open(out_filename, 'w')
+        out_file.write(txt_string)
+        out_file.close()
+    else:
+        # change output file from .txt to .md
+        newname = txt_filename.replace(info['midType'], info['newType'])
+        os.rename(txt_filename, newname)
