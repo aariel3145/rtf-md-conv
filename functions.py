@@ -1,20 +1,23 @@
 import os
 import sys
 
-from striprtf.striprtf import rtf_to_text
-
 ### 
 # convert .rtf to .txt
 # forked from https://github.com/joshy/striprtf
 ###
 def rtf_txt(info, base):  
     
+    from striprtf.striprtf import rtf_to_text
     
     # figure out infile name
     infilename = (info['in_folder'] + "/" + base + info['oldType'])
 
     # open file to read
-    rtf_file = open(infilename, 'r')
+    try:
+        rtf_file = open(infilename, 'r')
+    except:
+        print("could not open " + infilename)
+        return True
     # read into string
     rtf_string = rtf_file.read()
     # close input file
@@ -27,7 +30,11 @@ def rtf_txt(info, base):
     txt_filename = (info['mid_folder'] + "/" + base + info['midType'])
 
     # save string as .txt file
-    txt_file = open(txt_filename, 'w')
+    try:
+        txt_file = open(txt_filename, 'w')
+    except:
+        print("could not open " + txt_filename)
+        return True
     txt_file.write(txt_string)
     txt_file.close()
 
@@ -42,15 +49,27 @@ def txt_md(info, base):
     # check if we are overwriting or saving again
     if info['mid_folder'] != info['out_folder']:
         # open intermediate file, copy text
-        txt_file = open(txt_filename, 'r')
+        try:
+            txt_file = open(txt_filename, 'r')
+        except:
+            print("could not open " + txt_filename)
+            return True
         txt_string = txt_file.read()
         txt_file.close()
 
         # open output file, paste text
-        out_file = open(out_filename, 'w')
+        try:
+            out_file = open(out_filename, 'w')
+        except:
+            print("could not open" + out_filename)
+            return True
         out_file.write(txt_string)
         out_file.close()
     else:
         # change output file from .txt to .md
         newname = txt_filename.replace(info['midType'], info['newType'])
-        os.rename(txt_filename, newname)
+        try:
+            os.rename(txt_filename, newname)
+        except FileExistsError:
+            print(newname + " already exists")
+            return True

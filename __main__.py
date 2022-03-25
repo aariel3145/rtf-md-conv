@@ -12,14 +12,23 @@ info = {
     'newType' : '.md'
 }
 
+success = 0
+failure = 0
+
 # parse .rtf folder
 for filename in os.listdir(info['in_folder']):
     base = filename[0:-len(info['oldType'])]
 
     # convert from oldType to midType
-    rtf_txt(info, base)
-
+    error = rtf_txt(info, base)
     # convert from midType to newType
-    txt_md(info, base)
+    error = txt_md(info, base)
+
+    if error == True:
+        failure += 1
+    else:
+        success += 1
+
+print(f"\n\t{failure} files failed | {success} files converted\n")
     
 
